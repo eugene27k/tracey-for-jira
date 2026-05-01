@@ -1,0 +1,23 @@
+{
+  "name": "tracey-forge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Jira Cloud Forge app providing Tracey traceability views",
+  "scripts": {
+    "build:hierarchical-ui": "esbuild src/hierarchical-custom/main.js --bundle --format=iife --target=es2020 --outfile=static/hierarchical-ui/main.js",
+    "build:enhanced-ui": "esbuild src/enhanced-matrix-custom/main.js --bundle --format=iife --target=es2020 --outfile=static/enhanced-matrix-ui/main.js",
+    "build:custom-ui": "npm run build:hierarchical-ui && npm run build:enhanced-ui",
+    "lint": "echo 'No lint configured'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {
+    "@forge/api": "^7.0.1",
+    "@forge/bridge": "^4.3.0",
+    "@forge/react": "^11.0.0",
+    "@forge/resolver": "^1.5.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4"
+  }
+}

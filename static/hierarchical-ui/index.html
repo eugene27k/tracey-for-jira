@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hierarchical View</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="title-wrap">
+          <h1>Hierarchical View (Interactive)</h1>
+        </div>
+      </header>
+
+      <details id="filters-panel" class="filters-panel">
+        <summary class="filters-summary">
+          <span>Filters</span>
+          <span id="filters-summary-text" class="filters-summary-text">No filters</span>
+        </summary>
+        <section class="filters">
+          <label class="field">
+            <span>Issue types</span>
+            <select id="issue-type-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Epics</span>
+            <select id="epic-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Fixed versions</span>
+            <select id="fixed-version-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Labels</span>
+            <select id="label-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Components</span>
+            <select id="component-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>JQL</span>
+            <input id="jql-input" type="text" placeholder="Optional JQL" />
+          </label>
+          <button id="reset-filters-btn" class="btn">Reset filters</button>
+          <button id="refresh-btn" class="btn primary">Refresh</button>
+        </section>
+      </details>
+
+      <div id="status"></div>
+      <section class="insights-row">
+        <div class="insights-primary">
+          <div class="insights-meta">
+            <div class="panel-title">Filter Results</div>
+            <div class="results-actions">
+              <div id="matrix-stats" class="stats"></div>
+              <button id="refresh-quick-btn" class="btn primary compact">Refresh</button>
+            </div>
+          </div>
+          <div class="controls-panel">
+            <div class="panel-title">Controls</div>
+            <div class="controls-inline controls-actions">
+              <button id="zoom-out-btn" class="btn">Zoom Out</button>
+              <button id="zoom-in-btn" class="btn">Zoom In</button>
+              <button id="reset-view-btn" class="btn">Reset</button>
+              <button id="fit-view-btn" class="btn">Fit</button>
+              <label class="relations-toggle controls-toggle" for="show-relations-checkbox">
+                <input id="show-relations-checkbox" type="checkbox" />
+                <span>Show relations</span>
+              </label>
+              <button id="fullscreen-btn" class="btn accent">Full screen</button>
+              <span id="zoom-label" class="zoom-label">100%</span>
+            </div>
+          </div>
+        </div>
+        <aside id="coverage-widget" class="coverage-widget hidden">
+          <div class="coverage-title">Parent Coverage</div>
+          <div class="coverage-body">
+            <div class="coverage-topline">
+              <div id="coverage-percent" class="coverage-percent">0%</div>
+              <div id="coverage-details" class="coverage-details">Assigned 0 of 0 non-epic issues</div>
+            </div>
+            <div id="coverage-bar" class="coverage-bar" role="progressbar" aria-label="Parent coverage">
+              <div id="coverage-bar-fill" class="coverage-bar-fill"></div>
+            </div>
+            <div id="coverage-breakdown" class="coverage-breakdown">0 assigned • 0 unassigned</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="hierarchy-viewport" class="viewport" aria-label="Interactive hierarchy canvas">
+        <div id="hierarchy-stage" class="stage hidden">
+          <svg id="hierarchy-edges" class="edges"></svg>
+          <div id="hierarchy-cards" class="cards-layer"></div>
+        </div>
+        <div id="empty-state" class="empty hidden">No hierarchy found for the selected filters.</div>
+        <div id="chart-drag-ghost" class="drag-ghost hidden" aria-hidden="true"></div>
+      </section>
+
+      <section id="lonely-section" class="lonely hidden">
+        <h2>Standalone Issues</h2>
+        <div class="lonely-table-wrap">
+          <table class="lonely-table">
+            <thead>
+              <tr>
+                <th>Issue</th>
+                <th>Summary</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody id="lonely-rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+  <rect width="900" height="420" fill="#F4F5F7" />
+  <rect x="30" y="30" width="840" height="360" rx="10" fill="#FFFFFF" stroke="#DFE1E6" />
+  <text x="50" y="70" font-family="Arial, sans-serif" font-size="20" fill="#172B4D">Tracey (Sample)</text>
+
+  <text x="50" y="110" font-family="Arial, sans-serif" font-size="12" fill="#6B778C">Rows: Use cases</text>
+  <text x="180" y="110" font-family="Arial, sans-serif" font-size="12" fill="#6B778C">Columns: UI Views</text>
+
+  <g transform="translate(50,140)">
+    <rect width="780" height="210" fill="#FAFBFC" stroke="#DFE1E6" />
+
+    <g fill="#42526E" font-family="Arial, sans-serif" font-size="11">
+      <text x="10" y="20">Login</text>
+      <text x="10" y="60">View ranking</text>
+      <text x="10" y="100">Manage profile</text>
+      <text x="10" y="140">Export data</text>
+    </g>
+
+    <g fill="#42526E" font-family="Arial, sans-serif" font-size="11">
+      <text x="180" y="12">Home</text>
+      <text x="280" y="12">Login</text>
+      <text x="380" y="12">Profile</text>
+      <text x="480" y="12">Admin</text>
+      <text x="580" y="12">Reports</text>
+    </g>
+
+    <g>
+      <rect x="170" y="30" width="20" height="20" fill="#97A0AF" />
+      <rect x="270" y="30" width="20" height="20" fill="#36B37E" />
+      <rect x="370" y="70" width="20" height="20" fill="#FFAB00" />
+      <rect x="470" y="110" width="20" height="20" fill="#2684FF" />
+      <rect x="570" y="150" width="20" height="20" fill="#97A0AF" />
+      <rect x="270" y="150" width="20" height="20" fill="#97A0AF" />
+      <rect x="370" y="110" width="20" height="20" fill="#36B37E" />
+      <rect x="470" y="70" width="20" height="20" fill="#FFAB00" />
+    </g>
+  </g>
+
+  <g transform="translate(50,370)">
+    <rect x="0" y="0" width="12" height="12" fill="#97A0AF" />
+    <text x="18" y="11" font-family="Arial, sans-serif" font-size="11" fill="#42526E">Relationship exists</text>
+    <rect x="170" y="0" width="12" height="12" fill="#36B37E" />
+    <text x="186" y="11" font-family="Arial, sans-serif" font-size="11" fill="#42526E">Linked Test</text>
+    <rect x="280" y="0" width="12" height="12" fill="#FFAB00" />
+    <text x="296" y="11" font-family="Arial, sans-serif" font-size="11" fill="#42526E">Linked Bug</text>
+    <rect x="380" y="0" width="12" height="12" fill="#2684FF" />
+    <text x="396" y="11" font-family="Arial, sans-serif" font-size="11" fill="#42526E">Linked Requirement</text>
+  </g>
+</svg>

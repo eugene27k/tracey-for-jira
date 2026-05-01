@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tracey</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="title-wrap">
+          <h1>Tracey</h1>
+          <p id="project-label" class="project-label"></p>
+        </div>
+        <div class="topbar-actions">
+          <div class="mode-toggle" role="group" aria-label="Matrix mode">
+            <button id="mode-components-btn" class="btn">Components View</button>
+            <button id="mode-story-btn" class="btn">Story-to-Story View</button>
+            <button id="mode-hierarchy-btn" class="btn">Hierarchical View</button>
+          </div>
+          <button id="help-btn" class="btn about-btn" type="button" aria-haspopup="dialog">Help</button>
+          <button id="about-btn" class="btn about-btn" type="button" aria-haspopup="dialog">About</button>
+        </div>
+      </header>
+
+      <details id="filters-panel" class="filters-panel" open>
+        <summary class="filters-summary">
+          <span class="filters-title">Filters</span>
+          <span id="filters-summary-text" class="filters-summary-text">No filters</span>
+        </summary>
+        <section class="filters-grid">
+          <label class="field">
+            <span>Issue types</span>
+            <select id="issue-type-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Epics</span>
+            <select id="epic-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Fix versions</span>
+            <select id="fixed-version-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Labels</span>
+            <select id="label-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>Components</span>
+            <select id="component-select" multiple></select>
+          </label>
+          <label class="field">
+            <span>JQL</span>
+            <input id="jql-input" type="text" placeholder="Optional JQL" />
+            <span id="related-only-wrap" class="related-only field-checkbox">
+              <input id="related-only-checkbox" type="checkbox" />
+              <span>Related only</span>
+            </span>
+          </label>
+        </section>
+        <div class="filters-footer">
+          <div class="filters-actions">
+            <button id="reset-filters-btn" class="btn">Reset filters</button>
+            <button id="refresh-btn" class="btn primary">Refresh</button>
+          </div>
+        </div>
+      </details>
+
+      <section class="meta-row">
+        <div id="legend" class="legend"></div>
+        <div id="stats" class="stats"></div>
+      </section>
+
+      <div id="status" class="status hidden"></div>
+
+      <section id="matrix-wrap" class="matrix-wrap">
+        <div id="empty-state" class="empty-state hidden"></div>
+        <div id="matrix-scroll" class="matrix-scroll hidden">
+          <table id="matrix-table" class="matrix-table"></table>
+        </div>
+      </section>
+
+      <section id="hierarchy-panel" class="hierarchy-panel hidden">
+        <div class="hierarchy-controls">
+          <div class="hierarchy-controls-left">
+            <button id="zoom-out-btn" class="btn">Zoom Out</button>
+            <button id="zoom-in-btn" class="btn">Zoom In</button>
+            <button id="reset-view-btn" class="btn">Reset</button>
+            <button id="fit-view-btn" class="btn">Fit</button>
+            <button id="fullscreen-btn" class="btn">Full screen</button>
+            <span id="zoom-label" class="zoom-label">100%</span>
+          </div>
+          <div class="hierarchy-controls-right">
+            <label class="related-only">
+              <input id="show-relations-checkbox" type="checkbox" />
+              <span>Show relations</span>
+            </label>
+            <aside id="coverage-widget" class="coverage-widget hidden">
+              <div class="coverage-title">Parent Coverage</div>
+              <div class="coverage-body">
+                <div class="coverage-topline">
+                  <div id="coverage-percent" class="coverage-percent">0%</div>
+                  <div id="coverage-details" class="coverage-details">Assigned 0 of 0 non-epic issues</div>
+                </div>
+                <div id="coverage-bar" class="coverage-bar" role="progressbar" aria-label="Parent coverage">
+                  <div id="coverage-bar-fill" class="coverage-bar-fill"></div>
+                </div>
+                <div id="coverage-breakdown" class="coverage-breakdown">0 assigned • 0 unassigned</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <section id="hierarchy-viewport" class="hierarchy-viewport" aria-label="Hierarchy canvas">
+          <div id="hierarchy-stage" class="hierarchy-stage hidden">
+            <svg id="hierarchy-edges" class="hierarchy-edges"></svg>
+          </div>
+          <div id="hierarchy-empty-state" class="empty-state hidden"></div>
+          <div id="chart-drag-ghost" class="drag-ghost hidden" aria-hidden="true"></div>
+        </section>
+
+        <section id="lonely-section" class="lonely hidden">
+          <h2>Standalone Issues</h2>
+          <div class="lonely-table-wrap">
+            <table class="lonely-table">
+              <thead>
+                <tr>
+                  <th>Issue</th>
+                  <th>Summary</th>
+                  <th>Status</th>
+                  <th>Priority</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody id="lonely-rows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </div>
+
+    <div id="cell-modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">Cell details</h2>
+          <button id="modal-close-btn" class="btn" type="button">Close</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="about-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
+      <div class="modal-backdrop" data-close-about-modal="true"></div>
+      <div class="modal-content about-modal-content">
+        <div class="modal-header">
+          <h2 id="about-modal-title">About</h2>
+          <button id="about-modal-close-btn" class="btn" type="button">Close</button>
+        </div>
+        <div class="modal-body about-body">
+          <section class="modal-section">
+            <div class="modal-section-title">Product</div>
+            <div class="about-profile">
+              <img class="about-logo" src="./eugene-k-logo.jpg" alt="Eugene K logo" />
+              <div>
+                <p><strong>Tracey</strong> is a free beta Jira Cloud app for traceability, component coverage, story dependencies, and hierarchy analysis.</p>
+                <div class="social-links" aria-label="Social media">
+                  <a href="https://www.linkedin.com/in/yevhen-kliukin/" target="_blank" rel="noopener">LinkedIn</a>
+                  <a href="https://t.me/eugenekba" target="_blank" rel="noopener">Telegram (for Ukrainians)</a>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Owner</div>
+            <p>Vendor: Eugene K. Support and security contact: <a href="mailto:eugenktheba@gmail.com">eugenktheba@gmail.com</a>. Support is provided on a best-effort basis by email.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Version</div>
+            <p>Version 0.1.0. Marketplace preparation build. Data is read from Jira in your site and app configuration is stored with Forge app storage.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Documentation</div>
+            <p><a href="https://github.com/eugene-k/tracey" target="_blank" rel="noopener">GitHub repository</a>. Public Marketplace documentation, privacy policy, terms, and support policy should be linked from the final Marketplace listing.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Beta Notice</div>
+            <p>Tracey is provided as a free beta app. Validate configuration and output in a test Jira project before using it for production decisions.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="help-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+      <div class="modal-backdrop" data-close-help-modal="true"></div>
+      <div class="modal-content help-modal-content">
+        <div class="modal-header">
+          <h2 id="help-modal-title">Help</h2>
+          <button id="help-modal-close-btn" class="btn" type="button">Close</button>
+        </div>
+        <div class="modal-body about-body">
+          <section class="modal-section">
+            <div class="modal-section-title">Components View</div>
+            <p>Rows are Jira issues. Columns are affected components from Tracey's structured field. Green cells mean the issue is linked to that component.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Story-to-Story View</div>
+            <p>Rows and columns are stories. Cells show standard Jira issue links: red for blocks, purple for duplicates, yellow for clones, and grey for relates. Half-filled cells indicate the relation points from the column issue to the row issue.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Hierarchical View</div>
+            <p>Cards show issue hierarchy. Drag eligible leaf issues onto valid parent cards to assign hierarchy. Parent Coverage excludes epics and shows how many non-epic issues have a parent.</p>
+          </section>
+          <section class="modal-section">
+            <div class="modal-section-title">Filters</div>
+            <p>Filters limit the Jira issues loaded into the current view. Use Refresh after changing filters or when Jira data has changed.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="./about.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
