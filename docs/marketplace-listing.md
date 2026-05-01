@@ -20,6 +20,14 @@ Support email: eugenktheba@gmail.com
 
 Security contact: eugenktheba@gmail.com
 
+Documentation URL: https://eugene27k.github.io/tracey-for-jira/
+
+Privacy Policy URL: https://eugene27k.github.io/tracey-for-jira/privacy-policy.html
+
+Terms of Service URL: https://eugene27k.github.io/tracey-for-jira/terms-of-service.html
+
+Support and Security URL: https://eugene27k.github.io/tracey-for-jira/support-and-security.html
+
 ## Short Description
 
 Tracey helps Jira teams visualize issue traceability, component coverage, story dependencies, and hierarchy gaps.

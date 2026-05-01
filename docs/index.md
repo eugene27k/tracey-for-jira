@@ -4,10 +4,10 @@ Tracey is a free beta Jira Cloud app for traceability analysis, component covera
 
 ## Public Documents
 
-- [Privacy Policy](privacy-policy.md)
-- [Terms of Service](terms-of-service.md)
-- [Support and Security Policy](support-and-security.md)
-- [Marketplace Listing Draft](marketplace-listing.md)
+- [Privacy Policy](privacy-policy.html)
+- [Terms of Service](terms-of-service.html)
+- [Support and Security Policy](support-and-security.html)
+- [Marketplace Listing Draft](marketplace-listing.html)
 
 ## Support
 

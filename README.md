@@ -123,7 +123,8 @@ Marketplace publication is handled through the Atlassian Developer Console and A
 
 ## Documentation
 
-- [Marketplace checklist](docs/marketplace-listing.md)
-- [Privacy policy draft](docs/privacy-policy.md)
-- [Terms of service draft](docs/terms-of-service.md)
-- [Support and security policy](docs/support-and-security.md)
+- Public docs: <https://eugene27k.github.io/tracey-for-jira/>
+- Marketplace checklist: <https://eugene27k.github.io/tracey-for-jira/marketplace-listing.html>
+- Privacy policy: <https://eugene27k.github.io/tracey-for-jira/privacy-policy.html>
+- Terms of service: <https://eugene27k.github.io/tracey-for-jira/terms-of-service.html>
+- Support and security policy: <https://eugene27k.github.io/tracey-for-jira/support-and-security.html>
